@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shakil Ahmed | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- CSS VARIABLES (Dark Theme Default) --- */
+        :root {
+            --bg-color: #050505;
+            --card-bg: #101010;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --nav-bg: rgba(5, 5, 5, 0.9);
+            --border-color: rgba(255, 255, 255, 0.1);
+            
+            /* Modern Gradient Colors */
+            --gradient-1: linear-gradient(45deg, #ff0055, #ff00cc);
+            --gradient-2: linear-gradient(45deg, #00dbde, #fc00ff);
+            --accent: #00e5ff;
+            --shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+            
+            --transition: all 0.3s ease-in-out;
+        }
+
+        /* --- LIGHT THEME VARIABLES --- */
+        [data-theme="light"] {
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-primary: #1a1a1a;
+            --text-secondary: #555555;
+            --nav-bg: rgba(255, 255, 255, 0.9);
+            --border-color: rgba(0, 0, 0, 0.1);
+            
+            --gradient-1: linear-gradient(45deg, #d60049, #cc00a3);
+            --gradient-2: linear-gradient(45deg, #0099cc, #cc00cc);
+            --accent: #007bb5;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #ff00cc, #00dbde);
+            border-radius: 4px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--nav-bg);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            transition: background 0.3s;
+        }
+
+        .logo {
+            font-family: 'Fira Code', monospace;
+            font-size: 1.5rem; /* Slightly smaller to fit full name on mobile */
+            font-weight: 700;
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            white-space: nowrap;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            font-family: 'Fira Code', monospace;
+            color: var(--text-primary);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+            text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+        }
+
+        /* Theme Toggle Button */
+        .theme-switch {
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--border-color);
+        }
+        
+        .theme-switch:hover {
+            background: var(--accent);
+            color: #fff;
+            transform: rotate(15deg);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            margin-left: 20px;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 100px;
+            padding-top: 80px;
+            background-image: radial-gradient(circle at 10% 20%, rgba(255, 0, 204, 0.05) 0%, transparent 20%);
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-content p.greet {
+            color: var(--accent);
+            font-family: 'Fira Code', monospace;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+
+        .hero-content h1 span.name-highlight {
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content h2 {
+            font-size: 2.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+        
+        .hero-content h2 span {
+            color: var(--accent);
+        }
+
+        .hero-content p.desc {
+            max-width: 500px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+        }
+
+        /* --- BUTTON FIX (SOLID GRADIENT) --- */
+        .btn {
+            display: inline-block;
+            padding: 14px 35px;
+            border-radius: 50px;
+            font-family: 'Fira Code', monospace;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            
+            /* Solid Gradient Background */
+            background: var(--gradient-2);
+            color: #ffffff;
+            border: none;
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
+            
+            transition: var(--transition);
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 40px rgba(252, 0, 255, 0.6);
+        }
+
+        .hero-img {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-img img {
+            width: 320px;
+            height: 320px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            background: linear-gradient(var(--bg-color), var(--bg-color)) padding-box, var(--gradient-2) border-box;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .hero-img img:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        /* --- SECTIONS --- */
+        section {
+            padding: 100px 100px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 50px;
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 200px;
+            height: 2px;
+            background: var(--gradient-1);
+            margin-left: 20px;
+        }
+
+        /* --- EDUCATION --- */
+        .education-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            border-left: 3px solid var(--border-color);
+            padding-left: 40px;
+        }
+
+        .edu-item {
+            position: relative;
+            margin-bottom: 50px;
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .edu-item:hover {
+            transform: translateX(10px);
+            border-color: var(--accent);
+        }
+
+        .edu-item::before {
+            content: '';
+            position: absolute;
+            left: -49px;
+            top: 30px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--gradient-2);
+            border: 4px solid var(--bg-color);
+        }
+
+        .edu-item h3 {
+            color: var(--text-primary);
+            font-size: 1.3rem;
+        }
+        
+        .edu-item h4 {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin: 5px 0 15px 0;
+        }
+
+        .edu-date {
+            display: inline-block;
+            background: rgba(0, 229, 255, 0.1);
+            color: var(--accent);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+        }
+
+        /* --- SKILLS --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 25px;
+        }
+
+        .skill-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            z-index: 1;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .skill-card i {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .skill-card h3 {
+            color: var(--text-primary);
+            font-size: 1.1rem;
+        }
+
+        /* --- PROJECTS --- */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 12px;
+            transition: var(--transition);
+            position: relative;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .folder-icon {
+            color: var(--accent);
+            font-size: 2.5rem;
+        }
+
+        .link-icon {
+            color: var(--text-primary);
+            font-size: 1.4rem;
+        }
+        .link-icon:hover {
+            color: var(--accent);
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+        
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        .tech-list {
+            margin-top: 25px;
+            display: flex;
+            gap: 15px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* --- CONTACT --- */
+        .contact-container {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 50px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+        }
+
+        .contact-container h2 {
+            font-size: 3.5rem;
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+            border-color: transparent;
+            color: #fff;
+        }
+        .social-links a:nth-child(1):hover { background: #6e5494; } /* GitHub */
+        .social-links a:nth-child(2):hover { background: #0077b5; } /* LinkedIn */
+        .social-links a:nth-child(3):hover { background: #1877f2; } /* FB */
+        .social-links a:nth-child(4):hover { background: #e1306c; } /* Insta */
+        .social-links a:nth-child(5):hover { background: #a6ce39; } /* Orcid */
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            background: var(--card-bg);
+            margin-top: 50px;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            nav { padding: 20px; }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                right: 0;
+                width: 100%;
+                background: var(--nav-bg);
+                text-align: center;
+                padding: 20px 0;
+                border-bottom: 1px solid var(--border-color);
+            }
+            .nav-links.active { display: flex; }
+            .hamburger { display: block; }
+            .hero {
+                flex-direction: column-reverse;
+                padding: 100px 20px;
+                text-align: center;
+                height: auto;
+            }
+            .hero-img img {
+                width: 220px;
+                height: 220px;
+                margin-bottom: 30px;
+            }
+            .hero-content h1 { font-size: 2.8rem; }
+            .hero-content h2 { font-size: 1.8rem; }
+            section { padding: 60px 20px; }
+            .section-title::after { width: 80px; }
+            .education-container { padding-left: 20px; }
+            .edu-item::before { left: -29px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Shakil Ahmed</div>
+        
+        <div class="nav-right">
+            <ul class="nav-links">
+                <li><a href="#about" onclick="toggleMenu()">About</a></li>
+                <li><a href="#education" onclick="toggleMenu()">Education</a></li>
+                <li><a href="#skills" onclick="toggleMenu()">Skills</a></li>
+                <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
+                <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+            </ul>
+
+            <div style="display: flex; align-items: center;">
+                <div class="theme-switch" id="theme-toggle" title="Switch Theme">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <div class="hamburger" onclick="toggleMenu()">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero" id="about">
+        <div class="hero-content">
+            <p class="greet">Hi, my name is</p>
+            <h1><span class="name-highlight">Shakil Ahmed.</span></h1>
+            <h2><span class="typewriter"></span></h2>
+            <p class="desc">
+                I am an Undergraduate CSE student at PRSTU. A passionate programmer actively seeking opportunities abroad. Currently exploring the depths of C & C++.
+            </p>
+            <a href="mailto:shakil.ahmed.mobin@gmail.com" class="btn">Say Hello</a>
+        </div>
+        <div class="hero-img">
+            <img src="profile.jpg" alt="Shakil Ahmed Profile">
+        </div>
+    </header>
+
+    <section id="education">
+        <h2 class="section-title">Education</h2>
+        <div class="education-container">
+            
+            <div class="edu-item">
+                <h3>Pirojpur Science and Technology University</h3>
+                <h4>B.Sc. in Computer Science and Engineering</h4>
+                <span class="edu-date">2025 - 2028 | Present</span>
+                <p>Developing strong fundamentals in Algorithms, Data Structures, and System Design.</p>
+            </div>
+
+            <div class="edu-item">
+                <h3>Alekanda Govt. College, Barishal</h3>
+                <h4>Higher Secondary Certificate (Science)</h4>
+                <span class="edu-date">Mar 2021 - Nov 2022</span>
+                <p>GPA: 4.58. Developed analytical skills through Physics, Chemistry, and Mathematics.</p>
+            </div>
+
+            <div class="edu-item">
+                <h3>Ayla Patakata Sonarbangla Secondary School</h3>
+                <h4>Secondary School Certificate (Science)</h4>
+                <span class="edu-date">Jan 2019 - Nov 2020</span>
+                <p>GPA: 5.00. Completed with excellent academic performance.</p>
+            </div>
+
+            <div class="edu-item">
+                <h3>Lemua P.K. Secondary School</h3>
+                <h4>Junior School Certificate</h4>
+                <span class="edu-date">2018</span>
+                <p>GPA: 5.00. Distinction in Science group.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <i class="fa-brands fa-cuttlefish"></i>
+                <h3>C Programming</h3>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-code"></i>
+                <h3>C++ (Learning)</h3>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-file-excel"></i>
+                <h3>Microsoft Excel</h3>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-file-word"></i>
+                <h3>Microsoft Word</h3>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-file-powerpoint"></i>
+                <h3>PowerPoint</h3>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2 class="section-title">GitHub Repositories</h2>
+        <div class="project-grid">
+            
+            <div class="card">
+                <div class="card-top">
+                    <div class="folder-icon"><i class="far fa-folder"></i></div>
+                    <div class="links">
+                        <a href="https://github.com/shakil1815/C-Program-My-Code" target="_blank" class="link-icon"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <h3>C Program Code</h3>
+                <p>A collection of my personal C programming practice codes, algorithms, and problem solutions.</p>
+                <div class="tech-list">
+                    <span>C</span>
+                    <span>Algorithms</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-top">
+                    <div class="folder-icon"><i class="far fa-folder"></i></div>
+                    <div class="links">
+                        <a href="https://github.com/shakil1815/cpp-program-my-code" target="_blank" class="link-icon"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <h3>C++ Codebase</h3>
+                <p>My ongoing journey learning C++. Includes Object Oriented Programming (OOP) concepts and data structures.</p>
+                <div class="tech-list">
+                    <span>C++</span>
+                    <span>OOP</span>
+                    <span>STL</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="achievements">
+        <h2 class="section-title">Certifications & Achievements</h2>
+        <div class="project-grid">
+            
+            <div class="card">
+                <div class="card-top">
+                    <div class="folder-icon"><i class="fas fa-certificate"></i></div>
+                    <a href="https://www.coursera.org/account/accomplishments/verify/X1QIIOSCCT7Z" target="_blank" class="link-icon"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <h3>Getting Started with Excel</h3>
+                <p>Issued by Coursera. Mastery of spreadsheet fundamentals.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-top">
+                    <div class="folder-icon"><i class="fas fa-certificate"></i></div>
+                    <a href="https://www.coursera.org/account/accomplishments/verify/8AECJM75XR8A" target="_blank" class="link-icon"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <h3>Programming with C</h3>
+                <p>Issued by Coursera. Comprehensive C language certification.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-top">
+                    <div class="folder-icon"><i class="fas fa-trophy"></i></div>
+                    <a href="https://www.facebook.com/shakil1815" target="_blank" class="link-icon"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <h3>Math Olympiad</h3>
+                <p>Participant - 16th National Undergraduate Mathematics Olympiad.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="contact-container">
+            <p style="color: var(--accent); font-family: 'Fira Code', monospace; font-weight: bold;">What's Next?</p>
+            <h2>Get In Touch</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 30px;">
+                I am currently looking for new opportunities and collaborations. Whether you have a question or just want to say hi, I'll try my best to get back to you!
+            </p>
+            <a href="mailto:shakil.ahmed.mobin@gmail.com" class="btn">Get In Touch</a>
+
+            <div class="social-links">
+                <a href="https://github.com/shakil1815" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/shakilahmed1815/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.facebook.com/shakil1815" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/voided_shakil/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://orcid.org/0009-0006-3844-7141" target="_blank" title="ORCID"><i class="fab fa-orcid"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Designed & Built by Shakil Ahmed</p>
+        <p>&copy; 2025 All rights reserved.</p>
+    </footer>
+
+    <script>
+        // --- MOBILE MENU TOGGLE ---
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        // --- TYPEWRITER EFFECT ---
+        const text = ["I build things for the web.", "I solve problems in C++.", "I am a Tech Enthusiast."];
+        let count = 0;
+        let index = 0;
+        let currentText = "";
+        let letter = "";
+
+        (function type() {
+            if (count === text.length) {
+                count = 0;
+            }
+            currentText = text[count];
+            letter = currentText.slice(0, ++index);
+
+            document.querySelector('.typewriter').textContent = letter;
+            if (letter.length === currentText.length) {
+                count++;
+                index = 0;
+                setTimeout(type, 2000); 
+            } else {
+                setTimeout(type, 100);
+            }
+        }());
+
+        // --- THEME SWITCHER LOGIC ---
+        const toggleBtn = document.getElementById('theme-toggle');
+        const toggleIcon = toggleBtn.querySelector('i');
+        const root = document.documentElement;
+
+        // Check for saved user preference on load
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme) {
+            root.setAttribute('data-theme', currentTheme);
+            if (currentTheme === 'light') {
+                toggleIcon.classList.remove('fa-moon');
+                toggleIcon.classList.add('fa-sun');
+            }
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            const isLight = root.getAttribute('data-theme') === 'light';
+            
+            if (isLight) {
+                // Switch to Dark
+                root.setAttribute('data-theme', 'dark');
+                toggleIcon.classList.remove('fa-sun');
+                toggleIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                // Switch to Light
+                root.setAttribute('data-theme', 'light');
+                toggleIcon.classList.remove('fa-moon');
+                toggleIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    </script>
+</body>
+</html>
